@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floot NG</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --floot:#8B3DFF;
+  --floot-light:#C77DFF;
+  --bg:#0B0B10;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:#fff;
+}
+
+.container{ padding:16px; }
+
+/* Tabs */
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:16px;
+}
+.tab{
+  flex:1;
+  padding:12px;
+  border-radius:14px;
+  background:#1A1329;
+  text-align:center;
+}
+.tab.active{ background:var(--floot); }
+
+/* SLIDER */
+.ads-slider{
+  position:relative;
+  border-radius:18px;
+  height:200px;
+  margin-bottom:22px;
+  overflow:hidden;
+}
+.ad-slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center top;
+  background-repeat:no-repeat;
+  opacity:0;
+  transition:opacity 1s ease-in-out;
+}
+.ad-slide.active{ opacity:1; }
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.card{
+  background:linear-gradient(160deg, #1a1226, #120d1d);
+  border-radius:20px;
+  padding:18px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(139,61,255,0.15);
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(139,61,255,0.25);
+}
+
+.card i{
+  font-size:28px;
+  color:var(--floot-light);
+  margin-bottom:10px;
+}
+
+.card-title{
+  font-size:15px;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.card-desc{
+  font-size:12px;
+  opacity:0.7;
+  line-height:1.4;
+}
+
+.card-badge{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:10px;
+  padding:4px 8px;
+  border-radius:20px;
+  background:rgba(139,61,255,0.2);
+  color:var(--floot-light);
+}
+
+/* CONTACT */
+#flootContact{
+  position:fixed;
+  right:16px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column-reverse;
+  align-items:center;
+  z-index:9999;
+}
+
+.contact-toggle{
+  width:55px;
+  height:55px;
+  background:var(--floot);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(139,61,255,0.4);
+}
+
+.contact-panel{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:12px;
+  opacity:0;
+  transform:translateY(20px);
+  pointer-events:none;
+  transition:all 0.3s ease;
+}
+
+#flootContact.open .contact-panel{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+
+.contact-btn{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:20px;
+}
+
+.whatsapp{ background:#25D366; }
+.gmail{ background:#EA4335; }
+.facebook{ background:#1877F2; }
+
+/* 🔥 OFFLINE SCREEN */
+#offlineScreen{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(160deg, #0B0B10, #140c1f);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:10000;
+  text-align:center;
+  padding:20px;
+}
+
+#offlineScreen i{
+  font-size:80px;
+  color:var(--floot-light);
+  margin-bottom:20px;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:0.5}
+  50%{opacity:1}
+  100%{opacity:0.5}
+}
+
+#offlineScreen h2{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+#offlineScreen p{
+  opacity:0.7;
+  margin-bottom:20px;
+}
+
+#offlineScreen button{
+  background:var(--floot);
+  border:none;
+  padding:12px 25px;
+  border-radius:10px;
+  color:#fff;
+  font-size:16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 OFFLINE SCREEN -->
+<div id="offlineScreen">
+  <i class="fa-solid fa-wifi"></i>
+  <h2>No Internet Connection</h2>
+  <p>Your network went off. Check and try again.</p>
+  <button onclick="checkConnection()">Retry</button>
+</div>
+
+<div class="container">
+
+  <div class="tabs">
+    <div class="tab active">Basics</div>
+    <div class="tab">Opportunities</div>
+  </div>
+
+  <div class="ads-slider">
+    <div class="ad-slide active" style="background-image:url('https://i.postimg.cc/2yQ2HF5K/file-000000003c50720a988fe37e82f1c2df.png');"></div>
+    <div class="ad-slide" style="background-image:url('https://i.postimg.cc/RFc79CzR/file-000000001dcc720a80568a818ea4726c.png');"></div>
+    <div class="ad-slide" style="background-image:url('https://i.postimg.cc/8cp6ShHY/file-00000000a7ac71f48d2a377fcd08ec65.png');"></div>
+    <div class="ad-slide" style="background-image:url('https://i.postimg.cc/hPwfyFkS/file-00000000d25c7243b82112d1ecd96b4e.png');"></div>
+    <div class="ad-slide" style="background-image:url('https://i.postimg.cc/W4VpCsSG/1775509027314.jpg');"></div>
+  </div>
+
+  <div class="grid">
+    
+    <div class="card" onclick="openSGM()">
+      <div class="card-badge">HOT</div>
+      <i id="sgmIcon" class="fa-solid fa-thumbs-up"></i>
+      <div class="card-title">SGM</div>
+      <div class="card-desc">
+        Boost followers, likes & engagement instantly
+      </div>
+    </div>
+
+    <div class="card" onclick="openVTU()">
+      <div class="card-badge">FAST</div>
+      <i class="fa-solid fa-bolt"></i>
+      <div class="card-title">Floot VTU</div>
+      <div class="card-desc">
+        Buy airtime & data in seconds — no delays
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="flootContact">
+  <div class="contact-toggle">
+    <i class="fa-solid fa-comment-dots"></i>
+  </div>
+
+  <div class="contact-panel">
+    <a href="https://wa.me/2347017367586" target="_blank" class="contact-btn whatsapp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="mailto:flootinitiative@gmail.com" class="contact-btn gmail">
+      <i class="fa-solid fa-envelope"></i>
+    </a>
+    <a href="https://www.facebook.com/flootride" target="_blank" class="contact-btn facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+  </div>
+</div>
+
+<script>
+
+/* INTERNET CHECK */
+function checkConnection(){
+  if(navigator.onLine){
+    document.getElementById("offlineScreen").style.display="none";
+  }else{
+    document.getElementById("offlineScreen").style.display="flex";
+  }
+}
+
+window.addEventListener("offline", ()=>{
+  document.getElementById("offlineScreen").style.display="flex";
+});
+
+window.addEventListener("online", ()=>{
+  document.getElementById("offlineScreen").style.display="none";
+});
+
+/* RUN ON LOAD */
+window.onload = checkConnection;
+
+/* EXISTING CODE */
+const icons = [
+ "fa-solid fa-thumbs-up","fa-solid fa-comment","fa-solid fa-user-plus",
+ "fa-brands fa-facebook","fa-brands fa-instagram","fa-brands fa-tiktok",
+ "fa-brands fa-youtube","fa-solid fa-heart"
+];
+
+let i = 0;
+setInterval(()=>{
+  document.getElementById("sgmIcon").className = icons[i];
+  i = (i+1)%icons.length;
+},1200);
+
+function openSGM(){ window.open("https://floot.com.ng","_blank"); }
+function openVTU(){ window.open("https://sabuss.com/flootng5?login","_blank"); }
+
+let slides = document.querySelectorAll(".ad-slide");
+let index = 0;
+
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index = (index+1)%slides.length;
+  slides[index].classList.add("active");
+},4000);
+
+const flootContact = document.getElementById("flootContact");
+flootContact.querySelector(".contact-toggle").addEventListener("click", () => {
+  flootContact.classList.toggle("open");
+});
+
+</script>
+
+</body>
+</html>
