@@ -1,14 +1,11 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-NG">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Floot NG</title>
 <meta name="description" content="Earn with Floot NG. Buy airtime, data, boost social media, and join FlootGee. Partner and earn commission every time.">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
 :root{
   --floot:#8B3DFF;
@@ -28,13 +25,12 @@ body{
   color:#fff;
 }
 
-.container{ 
-  padding:16px; 
+.container{
+  padding:16px;
   max-width:480px;
   margin:0 auto;
 }
 
-/* Tabs */
 .tabs{
   display:flex;
   gap:10px;
@@ -50,16 +46,11 @@ body{
   border:1px solid transparent;
   transition:.2s;
 }
-.tab.active{ 
-  background:var(--floot); 
+.tab.active{
+  background:var(--floot);
   border-color:var(--floot-light);
 }
-.tab:focus-visible{
-  outline:2px solid var(--floot-light);
-  outline-offset:2px;
-}
 
-/* SLIDER */
 .ads-slider{
   position:relative;
   border-radius:18px;
@@ -79,7 +70,6 @@ body{
 }
 .ad-slide.active{ opacity:1; }
 
-/* CARDS */
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -138,7 +128,6 @@ body{
   color:var(--floot-light);
 }
 
-/* FLOOTGEE CARD STYLE */
 .card.flootgee{
   background:linear-gradient(160deg, #1a0f1a, #12091a);
   border:1px solid rgba(161,25,168,0.25);
@@ -158,18 +147,53 @@ body{
 .tab-content{display:none}
 .tab-content.active{display:block}
 
-/* CONTACT */
-#flootContact{
+/* DOWNLOAD APP BANNER - NOW BELOW CARDS */
+.download-banner{
+  background:linear-gradient(135deg, #25D366, #128C7E);
+  border-radius:18px;
+  padding:14px 18px;
+  margin-top:22px;
+  margin-bottom:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:.3s;
+  border:1px solid rgba(37,211,102,0.3);
+  text-decoration:none;
+  color:#fff;
+}
+.download-banner:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(37,211,102,0.4);
+}
+.download-banner-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.download-banner i{
+  font-size:28px;
+}
+.download-banner-text h4{
+  margin:0;
+  font-size:15px;
+  font-weight:700;
+}
+.download-banner-text p{
+  margin:2px 0 0 0;
+  font-size:11px;
+  opacity:0.9;
+}
+.download-banner.fa-arrow-right{
+  font-size:18px;
+  opacity:0.8;
+}
+
+.contact-fab{
   position:fixed;
   right:16px;
   bottom:20px;
-  display:flex;
-  flex-direction:column-reverse;
-  align-items:center;
-  z-index:9999;
-}
-
-.contact-toggle{
   width:55px;
   height:55px;
   background:var(--floot);
@@ -182,41 +206,120 @@ body{
   box-shadow:0 8px 20px rgba(139,61,255,0.4);
   border:none;
   color:#fff;
+  z-index:9998;
+  transition:.3s;
+}
+.contact-fab:hover{
+  transform:scale(1.1);
+  box-shadow:0 12px 30px rgba(139,61,255,0.6);
 }
 
-.contact-panel{
+#contactModal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  backdrop-filter:blur(10px);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:10000;
+  animation:fadeIn.3s;
+}
+
+#contactModal.active{
   display:flex;
-  flex-direction:column;
-  gap:12px;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.contact-content{
+  background:var(--card);
+  border-radius:24px;
+  padding:30px 25px;
+  max-width:320px;
+  width:90%;
+  position:relative;
+  border:1px solid rgba(139,61,255,0.3);
+  animation:slideUp.3s;
+}
+
+@keyframes slideUp{
+  from{transform:translateY(30px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.contact-close{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:rgba(255,255,255,0.1);
+  border:none;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.contact-content h3{
+  margin:0 0 20px 0;
+  font-size:20px;
+  text-align:center;
+}
+
+.contact-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:rgba(255,255,255,0.05);
+  padding:16px;
+  border-radius:16px;
   margin-bottom:12px;
-  opacity:0;
-  transform:translateY(20px);
-  pointer-events:none;
-  transition:all 0.3s ease;
+  text-decoration:none;
+  color:#fff;
+  transition:.3s;
+  border:1px solid rgba(255,255,255,0.1);
 }
 
-#flootContact.open.contact-panel{
-  opacity:1;
-  transform:translateY(0);
-  pointer-events:auto;
+.contact-item:hover{
+  background:rgba(255,255,255,0.1);
+  transform:translateX(5px);
 }
 
-.contact-btn{
-  width:48px;
-  height:48px;
+.contact-icon{
+  width:45px;
+  height:45px;
   border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:#fff;
   font-size:20px;
+  flex-shrink:0;
 }
 
-.whatsapp{ background:#25D366; }
-.gmail{ background:#EA4335; }
-.facebook{ background:#1877F2; }
+.contact-icon.whatsapp{ background:#25D366; }
+.contact-icon.gmail{ background:#EA4335; }
+.contact-icon.facebook{ background:#1877F2; }
 
-/* OFFLINE SCREEN */
+.contact-info h4{
+  margin:0 0 2px 0;
+  font-size:15px;
+  font-weight:700;
+}
+
+.contact-info p{
+  margin:0;
+  font-size:12px;
+  opacity:0.7;
+}
+
 #offlineScreen{
   position:fixed;
   inset:0;
@@ -225,7 +328,7 @@ body{
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  z-index:10000;
+  z-index:10001;
   text-align:center;
   padding:20px;
 }
@@ -235,10 +338,6 @@ body{
   color:var(--floot-light);
   margin-bottom:20px;
   animation:pulse 1.5s infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-.ad-slide, #offlineScreen i,.card { transition:none; animation:none; }
 }
 
 @keyframes pulse{
@@ -267,7 +366,6 @@ body{
   cursor:pointer;
 }
 
-/* Make 3 cards fit nicely in Basics */
 #basics.grid{
   grid-template-columns:1fr 1fr;
 }
@@ -276,10 +374,8 @@ body{
 }
 </style>
 </head>
-
 <body>
 
-<!-- OFFLINE SCREEN -->
 <div id="offlineScreen">
   <i class="fa-solid fa-wifi"></i>
   <h2>No Internet Connection</h2>
@@ -346,38 +442,70 @@ body{
     </div>
   </div>
 
+  <!-- DOWNLOAD APP BANNER - MOVED BELOW CARDS -->
+  <a href="https://www.appcreator24.com/app2576193-afw902" target="_blank" rel="noopener noreferrer" class="download-banner">
+    <div class="download-banner-left">
+      <i class="fa-brands fa-android"></i>
+      <div class="download-banner-text">
+        <h4>Download Floot NG App</h4>
+        <p>Faster access • Offline mode • Push notifications</p>
+      </div>
+    </div>
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+
 </div>
 
-<div id="flootContact">
-  <button class="contact-toggle" aria-label="Open contact options">
-    <i class="fa-solid fa-comment-dots"></i>
-  </button>
+<button class="contact-fab" onclick="openContact()" aria-label="Contact us">
+  <i class="fa-solid fa-comment-dots"></i>
+</button>
 
-  <div class="contact-panel">
-    <a href="https://wa.me/2347017367586" target="_blank" rel="noopener noreferrer" class="contact-btn whatsapp" aria-label="Chat on WhatsApp">
-      <i class="fa-brands fa-whatsapp"></i>
+<div id="contactModal" onclick="closeContact(event)">
+  <div class="contact-content" onclick="event.stopPropagation()">
+    <button class="contact-close" onclick="closeContact()" aria-label="Close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <h3>Contact Floot NG</h3>
+    
+    <a href="https://wa.me/2349032825215" target="_blank" rel="noopener noreferrer" class="contact-item">
+      <div class="contact-icon whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </div>
+      <div class="contact-info">
+        <h4>WhatsApp</h4>
+        <p>Chat with us instantly</p>
+      </div>
     </a>
-    <a href="mailto:flootinitiative@gmail.com" class="contact-btn gmail" aria-label="Send email">
-      <i class="fa-solid fa-envelope"></i>
+    
+    <a href="mailto:flootinitiative@gmail.com" class="contact-item">
+      <div class="contact-icon gmail">
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+      <div class="contact-info">
+        <h4>Email</h4>
+        <p>flootinitiative@gmail.com</p>
+      </div>
     </a>
-    <a href="https://www.facebook.com/flootride" target="_blank" rel="noopener noreferrer" class="contact-btn facebook" aria-label="Visit Facebook page">
-      <i class="fa-brands fa-facebook-f"></i>
+    
+    <a href="https://www.facebook.com/flootride" target="_blank" rel="noopener noreferrer" class="contact-item">
+      <div class="contact-icon facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+      </div>
+      <div class="contact-info">
+        <h4>Facebook</h4>
+        <p>Follow our page</p>
+      </div>
     </a>
   </div>
 </div>
 
 <script>
-/* INTERNET CHECK */
 function checkConnection(){
   const offlineScreen = document.getElementById("offlineScreen");
-  const contactToggle = document.querySelector(".contact-toggle");
   if(navigator.onLine){
     offlineScreen.style.display="none";
-    contactToggle.disabled = false;
   }else{
     offlineScreen.style.display="flex";
-    contactToggle.disabled = true;
-    document.getElementById("flootContact").classList.remove("open");
   }
 }
 
@@ -385,7 +513,6 @@ window.addEventListener("offline", checkConnection);
 window.addEventListener("online", checkConnection);
 window.onload = checkConnection;
 
-/* TABS */
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => {
@@ -400,7 +527,6 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
-/* SMG ICON ROTATION */
 const icons = [
  "fa-solid fa-thumbs-up","fa-solid fa-comment","fa-solid fa-user-plus",
  "fa-brands fa-facebook","fa-brands fa-instagram","fa-brands fa-tiktok",
@@ -419,110 +545,35 @@ function openSMG(){ window.open("https://floot.com.ng","_blank","noopener,norefe
 function openVTU(){ window.open("https://sabuss.com/flootng5?login","_blank","noopener,noreferrer"); }
 function openPartner(){ window.open("https://67c3ed53cf380.site123.me/floot-vtu-agent","_blank","noopener,noreferrer"); }
 
-/* OPEN FLOOTGEE PAGE */
 function openFlootGee(){
-  const flootGeeHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlootGee</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
-body{background:#f4f4f4;color:#222;}
-.container{max-width:480px;margin:auto;padding:20px;}
-.hero{margin-top:20px;background:#fff;border-radius:22px;padding:30px 20px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,.08);}
-.icon{width:90px;height:90px;margin:auto;border-radius:50%;background:linear-gradient(135deg,#A119A8,#D94AE0);display:flex;align-items:center;justify-content:center;font-size:42px;color:#fff;margin-bottom:20px;}
-.hero h1{color:#A119A8;font-size:38px;margin-bottom:10px;}
-.hero p{color:#666;line-height:1.7;margin-bottom:25px;}
-.btn{display:block;text-decoration:none;padding:16px;border-radius:14px;font-size:17px;font-weight:bold;margin-bottom:15px;transition:.3s;}
-.signup{background:#A119A8;color:#fff;}
-.signup:hover{background:#8d158f;}
-.login{background:#fff;color:#A119A8;border:2px solid #A119A8;}
-.login:hover{background:#A119A8;color:#fff;}
-.promo{margin-top:25px;background:linear-gradient(135deg,#A119A8,#D94AE0);border-radius:22px;padding:25px;color:#fff;text-align:center;box-shadow:0 10px 25px rgba(161,25,168,.25);}
-.badge{display:inline-block;background:#fff;color:#A119A8;padding:7px 18px;border-radius:20px;font-size:13px;font-weight:bold;margin-bottom:15px;}
-.promo h2{margin-bottom:15px;}
-.reward{font-size:40px;font-weight:bold;margin-bottom:15px;}
-.promo p{line-height:1.8;}
-.countdown{margin-top:25px;background:rgba(255,255,255,.18);border-radius:15px;padding:18px;}
-.countdown h3{margin-bottom:10px;font-size:15px;}
-#timer{font-size:28px;font-weight:bold;}
-.card{margin-top:20px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.06);}
-.card h2{color:#A119A8;margin-bottom:15px;}
-.card ul{list-style:none;}
-.card li{padding:10px 0;color:#555;}
-.footer{text-align:center;padding:25px;color:#888;font-size:13px;}
-</style>
-</head>
-<body>
-<div class="container">
-<div class="hero">
-<div class="icon">💸</div>
-<h1>FlootGee</h1>
-<p>Discover exclusive digital earning opportunities and grow your income with Floot NG's trusted partner network.</p>
-<a class="btn signup" href="https://affiliates.ginjabet.com/visit/?bta=35439&brand=ginjabetaffiliates">Create Account</a>
-<a class="btn login" href="https://affiliates.ginjabet.com">Member Login</a>
-</div>
-<div class="promo">
-<div class="badge">🔥 MONTHLY PROMO</div>
-<h2>Earn ₦3,000 Bonus</h2>
-<div class="reward">₦3,000</div>
-<p>Create your account today and qualify for a <strong>₦3,000 Bonus</strong> when you get <strong>10 qualified players.</strong></p>
-<div class="countdown">
-<h3>Promotion Ends In</h3>
-<div id="timer">Loading...</div>
-</div>
-<div class="card">
-<h2>Why FlootGee?</h2>
-<ul>
-<li>✅ Free Registration</li>
-<li>✅ Monthly Reward Campaigns</li>
-<li>✅ Performance Dashboard</li>
-<li>✅ Business Growth Opportunity</li>
-<li>✅ Dedicated Support</li>
-</ul>
-</div>
-<div class="footer">Powered by <strong>Floot NG</strong></div>
-</div>
-<script>
-function countdown(){
-let now=new Date();
-let end=new Date(now.getFullYear(),now.getMonth()+1,0,23,59,59);
-let distance=end-now;
-let d=Math.floor(distance/(1000*60*60*24));
-let h=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-let m=Math.floor((distance%(1000*60*60))/(1000*60));
-let s=Math.floor((distance%(1000*60))/1000);
-document.getElementById("timer").innerHTML=d+"d : "+h+"h : "+m+"m : "+s+"s";
-}
-countdown();
-setInterval(countdown,1000);
-<\/script>
-</body>
-</html>`;
-
-  const newWindow = window.open("","_blank");
-  newWindow.document.write(flootGeeHTML);
-  newWindow.document.close();
+    window.open("https://oceandrives196-boop.github.io/FlootGee/","_blank","noopener,noreferrer");
 }
 
-/* SLIDER */
 let slides = document.querySelectorAll(".ad-slide");
 let index = 0;
 
 setInterval(()=>{
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    slides[index].classList.remove("active");
-    index = (index+1)%slides.length;
-    slides[index].classList.add("active");
-  }
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+slides[index].classList.remove("active");
+index = (index+1)%slides.length;
+slides[index].classList.add("active");
+}
 },4000);
 
-/* CONTACT TOGGLE */
-const flootContact = document.getElementById("flootContact");
-flootContact.querySelector(".contact-toggle").addEventListener("click", () => {
-  flootContact.classList.toggle("open");
+function openContact(){
+  document.getElementById('contactModal').classList.add('active');
+}
+
+function closeContact(e){
+  if(!e || e.target.id === 'contactModal'){
+    document.getElementById('contactModal').classList.remove('active');
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape'){
+    closeContact();
+  }
 });
 </script>
 
