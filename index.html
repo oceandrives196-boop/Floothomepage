@@ -5,1329 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Floot NG</title>
 <meta name="description" content="Floot NG - Buy airtime, data, access digital services and discover earning opportunities.">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-:root{
-  --floot:#8B3DFF;
-  --floot-dark:#6F20E8;
-  --bg:#F7F7FB;
-  --text:#17131F;
-  --muted:#77727F;
-  --border:#E9E6EF;
-  --shadow:0 8px 25px rgba(30,20,50,.07);
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Arial,sans-serif;
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(139,61,255,.07),
-      transparent 30%
-    ),
-    var(--bg);
-  color:var(--text);
-  min-height:100vh;
-}
-
-.container{
-  width:100%;
-  max-width:480px;
-  margin:0 auto;
-  padding:12px 16px 35px;
-}
-
-/* HEADER */
-.brand-header{
-  display:flex;
-  padding:4px 2px 10px;
-  margin-bottom:8px;
-}
-
-.brand-logo-image{
-  width:125px;
-  height:52px;
-  object-fit:contain;
-  border-radius:6px;
-}
-
-/* TABS */
-.tabs{
-  display:flex;
-  gap:8px;
-  background:#EEEAF5;
-  padding:5px;
-  border-radius:16px;
-  margin-bottom:18px;
-}
-
-.tab{
-  flex:1;
-  padding:11px 8px;
-  border-radius:12px;
-  text-align:center;
-  font-size:13px;
-  font-weight:700;
-  color:#746D7E;
-  cursor:pointer;
-  transition:.25s ease;
-}
-
-.tab.active{
-  background:#FFFFFF;
-  color:var(--floot);
-  box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-
-/* ADS */
-.ads-slider{
-  position:relative;
-  width:100%;
-  height:220px;
-  border-radius:22px;
-  overflow:hidden;
-  margin-bottom:22px;
-  background:#FFFFFF;
-  border:1px solid rgba(139,61,255,.08);
-  box-shadow:var(--shadow);
-}
-
-.ad-slide{
-  position:absolute;
-  inset:0;
-  background-size:contain;
-  background-position:center;
-  background-repeat:no-repeat;
-  opacity:0;
-  transition:opacity 1s ease-in-out;
-}
-
-.ad-slide.active{
-  opacity:1;
-}
-
-/* TAB CONTENT */
-.tab-content{
-  display:none;
-}
-
-.tab-content.active{
-  display:block;
-}
-
-/* SECTION */
-.section-heading{
-  margin:4px 2px 13px;
-}
-
-.section-heading h2{
-  margin:0;
-  font-size:18px;
-  font-weight:800;
-}
-
-.section-heading p{
-  margin:4px 0 0;
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-
-.grid-full{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:14px;
-}
-
-/* CARDS */
-.card{
-  position:relative;
-  background:#FFFFFF;
-  border-radius:22px;
-  padding:18px;
-  min-height:170px;
-  cursor:pointer;
-  overflow:hidden;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  transition:.25s ease;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 14px 35px rgba(139,61,255,.15);
-}
-
-.card-icon{
-  width:50px;
-  height:50px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(139,61,255,.13),
-      rgba(199,125,255,.20)
-    );
-  color:var(--floot);
-  font-size:22px;
-  margin-bottom:18px;
-}
-
-.card-title{
-  font-size:15px;
-  font-weight:800;
-  margin-bottom:6px;
-}
-
-.card-desc{
-  font-size:12px;
-  line-height:1.5;
-  color:var(--muted);
-}
-
-.card-badge{
-  position:absolute;
-  top:14px;
-  right:14px;
-  font-size:9px;
-  font-weight:800;
-  padding:5px 8px;
-  border-radius:20px;
-  background:#F1EBFF;
-  color:var(--floot);
-}
-
-/* FLOOTGEE */
-.card.flootgee{
-  background:linear-gradient(145deg,#FFFFFF,#FFF7FF);
-  border-color:rgba(161,25,168,.18);
-}
-
-.card.flootgee .card-icon{
-  background:
-    linear-gradient(
-      135deg,
-      rgba(161,25,168,.12),
-      rgba(217,74,224,.16)
-    );
-  color:#A119A8;
-}
-
-.card.flootgee .card-badge{
-  background:#FBEAFF;
-  color:#A119A8;
-}
-
-/* PARTNER */
-.partner-card{
-  min-height:145px;
-  background:linear-gradient(135deg,#FFFFFF,#F8F3FF);
-}
-
-/* DOWNLOAD BANNER */
-.download-banner{
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:22px;
-  padding:17px 18px;
-  border-radius:21px;
-  color:#FFF;
-  overflow:hidden;
-  background:linear-gradient(135deg,#25D366,#128C7E);
-  box-shadow:0 10px 25px rgba(37,211,102,.18);
-  cursor:pointer;
-  border:none;
-  width:100%;
-  text-align:left;
-  transition:.25s ease;
-}
-
-.download-banner:hover{
-  transform:translateY(-2px);
-}
-
-.download-banner-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  z-index:2;
-}
-
-.download-banner-left > i{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.16);
-  font-size:22px;
-}
-
-.download-banner-text h4{
-  margin:0;
-  font-size:14px;
-  font-weight:800;
-}
-
-.download-banner-text p{
-  margin:3px 0 0;
-  font-size:10px;
-  opacity:.9;
-}
-
-/* CONTACT BUTTON */
-.contact-fab{
-  position:fixed;
-  right:18px;
-  bottom:20px;
-  width:57px;
-  height:57px;
-  border:none;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    linear-gradient(
-      135deg,
-      var(--floot),
-      var(--floot-dark)
-    );
-  color:#FFF;
-  font-size:21px;
-  cursor:pointer;
-  z-index:9998;
-  box-shadow:0 10px 25px rgba(139,61,255,.35);
-}
-
-/* CONTACT MODAL */
-#contactModal{
-  position:fixed;
-  inset:0;
-  background:rgba(20,15,30,.45);
-  backdrop-filter:blur(8px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  z-index:10000;
-}
-
-#contactModal.active{
-  display:flex;
-}
-
-.contact-content{
-  width:100%;
-  max-width:350px;
-  background:#FFF;
-  border-radius:26px;
-  padding:28px 22px 22px;
-  position:relative;
-  border:1px solid var(--border);
-}
-
-.contact-close{
-  position:absolute;
-  top:13px;
-  right:13px;
-  width:34px;
-  height:34px;
-  border:none;
-  border-radius:50%;
-  background:#F3F1F6;
-  color:#333;
-  cursor:pointer;
-  font-size:17px;
-}
-
-.contact-content h3{
-  margin:0 0 20px;
-  text-align:center;
-  font-size:20px;
-  font-weight:800;
-}
-
-.contact-item{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:13px;
-  margin-bottom:10px;
-  border-radius:17px;
-  background:#F8F7FA;
-  border:1px solid #EEEAF1;
-  text-decoration:none;
-  color:var(--text);
-}
-
-.contact-icon{
-  width:44px;
-  height:44px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#FFF;
-  font-size:19px;
-}
-
-.contact-icon.whatsapp{
-  background:#25D366;
-}
-
-.contact-icon.gmail{
-  background:#EA4335;
-}
-
-.contact-icon.facebook{
-  background:#1877F2;
-}
-
-.contact-info h4{
-  margin:0 0 3px;
-  font-size:14px;
-  font-weight:800;
-}
-
-.contact-info p{
-  margin:0;
-  font-size:11px;
-  color:var(--muted);
-}
-
-/* OFFLINE */
-#offlineScreen{
-  position:fixed;
-  inset:0;
-  background:#FFF;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:10001;
-  text-align:center;
-  padding:25px;
-}
-
-/* INSTALL MODAL */
-#installModal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(12px);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:16px;
-  z-index:10002;
-}
-
-#installModal.active{
-  display:flex;
-}
-
-.install-card{
-  width:100%;
-  max-width:380px;
-  background:#241E38;
-  border-radius:28px;
-  padding:22px 18px 20px;
-  position:relative;
-  box-shadow:0 25px 60px rgba(0,0,0,.5);
-  animation:popUp .3s ease;
-}
-
-@keyframes popUp{
-  from{
-    transform:scale(.9);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-.install-close{
-  position:absolute;
-  top:14px;
-  right:14px;
-  width:34px;
-  height:34px;
-  border:none;
-  border-radius:50%;
-  background:rgba(255,255,255,.1);
-  color:#FFF;
-  font-size:16px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.install-title{
-  margin:0;
-  text-align:center;
-  font-size:19px;
-  font-weight:800;
-  color:#FFF;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-}
-
-.install-subtitle{
-  text-align:center;
-  color:rgba(255,255,255,.6);
-  font-size:13px;
-  margin:8px 0 18px;
-}
-
-.install-options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:10px;
-}
-
-.install-option{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:20px;
-  padding:20px 12px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.install-option:hover{
-  background:rgba(255,255,255,.1);
-  transform:translateY(-2px);
-}
-
-.install-option i{
-  font-size:38px;
-  display:block;
-  margin-bottom:12px;
-}
-
-.install-option.android-icon{
-  color:#3DDC84;
-}
-
-.install-option.apple-icon{
-  color:#FFF;
-}
-
-.install-option h4{
-  margin:0;
-  color:#FFF;
-  font-size:16px;
-  font-weight:800;
-}
-
-.install-option p{
-  margin:3px 0 0;
-  color:rgba(255,255,255,.6);
-  font-size:11px;
-}
-
-/* IPHONE STEPS */
-.iphone-steps{
-  display:none;
-}
-
-.iphone-steps.active{
-  display:block;
-}
-
-.install-steps-list{
-  display:grid;
-  gap:12px;
-  margin-bottom:14px;
-}
-
-.install-step-item{
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:14px;
-}
-
-.step-num{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:#8B5CF6;
-  color:#FFF;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:800;
-  font-size:14px;
-  flex-shrink:0;
-}
-
-.install-step-item p{
-  margin:0;
-  color:#E9E6EF;
-  font-size:13.5px;
-  line-height:1.4;
-}
-
-.install-step-item b{
-  color:#C77DFF;
-  font-weight:800;
-}
-
-.share-icon{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:22px;
-  height:22px;
-  background:#FFF;
-  border-radius:5px;
-  color:#0A84FF;
-  font-size:12px;
-  margin:0 2px;
-  vertical-align:middle;
-}
-
-.safari-note{
-  background:rgba(139,92,246,.18);
-  border:1px solid rgba(139,92,246,.2);
-  border-radius:14px;
-  padding:12px 14px;
-  display:flex;
-  gap:8px;
-  color:rgba(255,255,255,.85);
-  font-size:12px;
-  line-height:1.4;
-  margin-bottom:16px;
-}
-
-.safari-note i{
-  color:#C77DFF;
-  flex-shrink:0;
-  margin-top:2px;
-}
-
-.btn-gotit{
-  width:100%;
-  background:#8B5CF6;
-  border:none;
-  padding:15px;
-  border-radius:14px;
-  color:#FFF;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.btn-gotit:hover{
-  background:#7C3AED;
-}
+:root{--floot:#8B3DFF;--floot-dark:#6F20E8;--bg:#F7F7FB;--text:#17131F;--muted:#77727F;--border:#E9E6EF;--shadow:0 8px 25px rgba(30,20,50,.07);}
+*{box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{margin:0;font-family:system-ui,-apple-system,Arial,sans-serif;background:radial-gradient(circle at top right, rgba(139,61,255,.07), transparent 30%), var(--bg);color:var(--text);min-height:100vh;}
+.container{width:100%;max-width:480px;margin:0 auto;padding:12px 16px 35px;}
+.brand-header{display:flex;padding:4px 2px 10px;margin-bottom:8px;}
+.brand-logo-image{width:125px;height:52px;object-fit:contain;border-radius:6px;}
+.tabs{display:flex;gap:8px;background:#EEEAF5;padding:5px;border-radius:16px;margin-bottom:18px;}
+.tab{flex:1;padding:11px 8px;border-radius:12px;text-align:center;font-size:13px;font-weight:700;color:#746D7E;cursor:pointer;transition:.25s ease;}
+.tab.active{background:#FFFFFF;color:var(--floot);box-shadow:0 4px 12px rgba(0,0,0,.08);}
+.ads-slider{position:relative;width:100%;height:220px;border-radius:22px;overflow:hidden;margin-bottom:22px;background:#FFFFFF;border:1px solid rgba(139,61,255,.08);box-shadow:var(--shadow);}
+.ad-slide{position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity 1s ease-in-out;}
+.ad-slide.active{opacity:1;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.section-heading{margin:4px 2px 13px;}.section-heading h2{margin:0;font-size:18px;font-weight:800;}.section-heading p{margin:4px 0 0;font-size:12px;color:var(--muted);}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}.grid-full{display:grid;grid-template-columns:1fr;gap:14px;}
+.card{position:relative;background:#FFFFFF;border-radius:22px;padding:18px;min-height:170px;cursor:pointer;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);transition:.25s ease;}
+.card:hover{transform:translateY(-5px);box-shadow:0 14px 35px rgba(139,61,255,.15);}
+.card-icon{width:50px;height:50px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, rgba(139,61,255,.13), rgba(199,125,255,.20));color:var(--floot);font-size:22px;margin-bottom:18px;}
+.card-title{font-size:15px;font-weight:800;margin-bottom:6px;}.card-desc{font-size:12px;line-height:1.5;color:var(--muted);}
+.card-badge{position:absolute;top:14px;right:14px;font-size:9px;font-weight:800;padding:5px 8px;border-radius:20px;background:#F1EBFF;color:var(--floot);}
+.card.ride-card{background:#FFFFFF;border-color:rgba(139,61,255,.18);}
+.card.ride-card.card-icon{background:linear-gradient(135deg, rgba(139,61,255,.13), rgba(199,125,255,.20));color:#8B3DFF;}
+.card.ride-card.card-badge{background:#F1EBFF;color:#8B3DFF;}
+#rideDeliveryIcon{transition:transform.35s ease, opacity.35s ease;display:inline-block;}
+#rideDeliveryIcon.switching{transform:scale(0) rotate(-15deg);opacity:0;}
+.download-banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;padding:17px 18px;border-radius:21px;color:#FFF;overflow:hidden;background:linear-gradient(135deg, #25D366, #128C7E);box-shadow:0 10px 25px rgba(37,211,102,.18);cursor:pointer;border:none;width:100%;text-align:left;transition:.25s ease;}
+.download-banner-left{display:flex;align-items:center;gap:12px;}
+.download-banner-left > i{width:43px;height:43px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.16);font-size:22px;}
+.download-banner-text h4{margin:0;font-size:14px;font-weight:800;}.download-banner-text p{margin:3px 0 0;font-size:10px;opacity:.9;}
+.contact-fab{position:fixed;right:18px;bottom:90px;width:57px;height:57px;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, var(--floot), var(--floot-dark));color:#FFF;font-size:21px;cursor:pointer;z-index:9998;box-shadow:0 10px 25px rgba(139,61,255,.35);}
+#contactModal{position:fixed;inset:0;background:rgba(20,15,30,.45);backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;padding:20px;z-index:10000;}
+#contactModal.active{display:flex;}
+.contact-content{width:100%;max-width:350px;background:#FFF;border-radius:26px;padding:28px 22px 22px;position:relative;border:1px solid var(--border);}
+.contact-close{position:absolute;top:13px;right:13px;width:34px;height:34px;border:none;border-radius:50%;background:#F3F1F6;color:#333;cursor:pointer;font-size:17px;}
+.contact-content h3{margin:0 0 20px;text-align:center;font-size:20px;font-weight:800;}
+.contact-item{display:flex;align-items:center;gap:13px;padding:13px;margin-bottom:10px;border-radius:17px;background:#F8F7FA;border:1px solid #EEEAF1;text-decoration:none;color:var(--text);}
+.contact-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#FFF;font-size:19px;}
+.contact-icon.whatsapp{background:#25D366;}.contact-icon.gmail{background:#EA4335;}.contact-icon.facebook{background:#1877F2;}
+.contact-info h4{margin:0 0 3px;font-size:14px;font-weight:800;}.contact-info p{margin:0;font-size:11px;color:var(--muted);}
+#offlineScreen{position:fixed;inset:0;background:#FFF;display:none;justify-content:center;align-items:center;flex-direction:column;z-index:10001;text-align:center;padding:25px;}
+#installModal{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);display:none;justify-content:center;align-items:center;padding:16px;z-index:10002;}
+#installModal.active{display:flex;}
+.install-card{width:100%;max-width:380px;background:#241E38;border-radius:28px;padding:22px 18px 20px;position:relative;box-shadow:0 25px 60px rgba(0,0,0,.5);}
+.install-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:none;border-radius:50%;background:rgba(255,255,255,.1);color:#FFF;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.install-title{margin:0;text-align:center;font-size:19px;font-weight:800;color:#FFF;display:flex;align-items:center;justify-content:center;gap:6px;}
+.install-subtitle{text-align:center;color:rgba(255,255,255,.6);font-size:13px;margin:8px 0 18px;}
+.install-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;}
+.install-option{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px 12px;text-align:center;cursor:pointer;}
+.install-option i{font-size:38px;display:block;margin-bottom:12px;}
+.install-option h4{margin:0;color:#FFF;font-size:16px;font-weight:800;}
+.install-option p{margin:3px 0 0;color:rgba(255,255,255,.6);font-size:11px;}
+.iphone-steps{display:none;}.iphone-steps.active{display:block;}
+.install-steps-list{display:grid;gap:12px;margin-bottom:14px;}
+.install-step-item{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:14px 14px;}
+.step-num{width:32px;height:32px;border-radius:50%;background:#8B5CF6;color:#FFF;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;}
+.install-step-item p{margin:0;color:#E9E6EF;font-size:13.5px;line-height:1.4;}
+.install-step-item b{color:#C77DFF;font-weight:800;}
+.share-icon{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#FFF;border-radius:5px;color:#0A84FF;font-size:12px;margin:0 2px;vertical-align:middle;}
+.safari-note{background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.2);border-radius:14px;padding:12px 14px;display:flex;gap:8px;color:rgba(255,255,255,.85);font-size:12px;line-height:1.4;margin-bottom:16px;}
+.safari-note i{color:#C77DFF;flex-shrink:0;margin-top:2px;}
+.btn-gotit{width:100%;background:#8B5CF6;border:none;padding:15px;border-radius:14px;color:#FFF;font-size:15px;font-weight:800;cursor:pointer;}
 </style>
 </head>
-
 <body>
-
-<!-- OFFLINE SCREEN -->
-<div id="offlineScreen">
-  <i
-    class="fa-solid fa-wifi"
-    style="font-size:70px;color:var(--floot);margin-bottom:20px;"
-  ></i>
-
-  <h2>No Internet</h2>
-
-  <button
-    onclick="location.reload()"
-    style="
-      background:linear-gradient(135deg,var(--floot),var(--floot-dark));
-      border:none;
-      padding:12px 26px;
-      border-radius:12px;
-      color:#FFF;
-      font-weight:700;
-    "
-  >
-    Retry
-  </button>
-</div>
-
+<div id="offlineScreen"><i class="fa-solid fa-wifi" style="font-size:70px;color:var(--floot);margin-bottom:20px;"></i><h2>No Internet</h2><button onclick="location.reload()" style="background:linear-gradient(135deg,var(--floot),var(--floot-dark));border:none;padding:12px 26px;border-radius:12px;color:#FFF;font-weight:700;">Retry</button></div>
 <div class="container">
-
-  <!-- HEADER -->
-  <header class="brand-header">
-    <img
-      class="brand-logo-image"
-      src="https://i.postimg.cc/bJ6Q4DPZ/FB-IMG-1773667740309.jpg"
-      alt="Floot NG"
-    >
-  </header>
-
-  <!-- TABS -->
-  <div class="tabs">
-    <div class="tab active" data-tab="basics">
-      Services
-    </div>
-
-    <div class="tab" data-tab="opportunities">
-      Opportunities
-    </div>
-  </div>
-
-  <!-- AD SLIDER -->
-  <div class="ads-slider">
-
-    <div
-      class="ad-slide active"
-      style="
-        background-image:url(
-          'https://i.postimg.cc/qqkFrYN8/file-00000000b06c81f49441a2b1b60ee1dd.png'
-        );
-      "
-    ></div>
-
-    <div
-      class="ad-slide"
-      style="
-        background-image:url(
-          'https://i.postimg.cc/zG9Pv3LL/file-0000000028e88210b70f608cca557d06.png'
-        );
-      "
-    ></div>
-
-    <div
-      class="ad-slide"
-      style="
-        background-image:url(
-          'https://i.postimg.cc/6qjMXQsb/file-0000000012b482108546bdb52ebe44c9.png'
-        );
-      "
-    ></div>
-
-  </div>
-
-  <!-- SERVICES -->
-  <div id="basics" class="tab-content active">
-
-    <div class="section-heading">
-      <h2>What do you need today?</h2>
-      <p>Access Floot NG services quickly.</p>
-    </div>
-
-    <div class="grid">
-
-      <!-- FLOOT VTU -->
-      <div class="card" onclick="openVTU()">
-
-        <div class="card-badge">
-          FAST
-        </div>
-
-        <div class="card-icon">
-          <i class="fa-solid fa-bolt"></i>
-        </div>
-
-        <div class="card-title">
-          Floot VTU
-        </div>
-
-        <div class="card-desc">
-          Buy airtime and data in seconds
-        </div>
-
-      </div>
-
-      <!-- FLOOTGEE -->
-      <div class="card flootgee" onclick="openFlootGee()">
-
-        <div class="card-badge">
-          PARTNER
-        </div>
-
-        <div class="card-icon">
-          <i class="fa-solid fa-money-bill-wave"></i>
-        </div>
-
-        <div class="card-title">
-          FlootGee
-        </div>
-
-        <div class="card-desc">
-          Discover exclusive earning opportunities
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- OPPORTUNITIES -->
-  <div id="opportunities" class="tab-content">
-
-    <div class="section-heading">
-      <h2>Earn with Floot</h2>
-      <p>Turn transactions into earning.</p>
-    </div>
-
-    <div class="grid-full">
-
-      <div class="card" onclick="openPartner()">
-
-        <div class="card-badge">
-          EARN
-        </div>
-
-        <div class="card-icon">
-          <i class="fa-solid fa-naira-sign"></i>
-        </div>
-
-        <div class="card-title">
-          Become a Floot Partner
-        </div>
-
-        <div class="card-desc">
-          Earn commission whenever people buy airtime and data.
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <!-- DOWNLOAD BANNER -->
-  <button
-    class="download-banner"
-    onclick="openInstallChooser()"
-  >
-
-    <div class="download-banner-left">
-
-      <i class="fa-brands fa-android"></i>
-
-      <div class="download-banner-text">
-
-        <h4>
-          Download Floot NG App
-        </h4>
-
-        <p>
-          Faster access • Offline mode • Push notifications
-        </p>
-
-      </div>
-
-    </div>
-
-    <i class="fa-solid fa-arrow-right"></i>
-
-  </button>
-
+<header class="brand-header"><img class="brand-logo-image" src="https://ik.imagekit.io/anyl9hsxh/FB_IMG_1773667740309.jpg" alt="Floot NG"></header>
+<div class="tabs"><div class="tab active" data-tab="basics">Services</div><div class="tab" data-tab="opportunities">Opportunities</div></div>
+<div class="ads-slider">
+<div class="ad-slide active" style="background-image:url('https://ik.imagekit.io/anyl9hsxh/file_0000000012b482108546bdb52ebe44c9.png');"></div>
+<div class="ad-slide" style="background-image:url('https://ik.imagekit.io/anyl9hsxh/file_0000000028e88210b70f608cca557d06.png');"></div>
+<div class="ad-slide" style="background-image:url('https://ik.imagekit.io/anyl9hsxh/file_00000000b06c81f49441a2b1b60ee1dd.png');"></div>
 </div>
-
-<!-- CONTACT BUTTON -->
-<button
-  class="contact-fab"
-  onclick="openContact()"
->
-  <i class="fa-solid fa-comment-dots"></i>
+<div id="basics" class="tab-content active">
+<div class="section-heading"><h2>What do you need today?</h2><p>Access Floot NG services quickly.</p></div>
+<div class="grid">
+<div class="card" onclick="openVTU()"><div class="card-badge">FAST</div><div class="card-icon"><i class="fa-solid fa-bolt"></i></div><div class="card-title">Floot VTU</div><div class="card-desc">Buy airtime and data in seconds</div></div>
+<div class="card ride-card" onclick="openRide()"><div class="card-badge">RIDE</div><div class="card-icon"><i id="rideDeliveryIcon" class="fa-solid fa-car-side"></i></div><div class="card-title">Ride / Delivery</div><div class="card-desc">Book a ride or send parcels fast</div></div>
+</div>
+</div>
+<div id="opportunities" class="tab-content">
+<div class="section-heading"><h2>Earn with Floot</h2><p>Turn transactions into earning.</p></div>
+<div class="grid-full"><div class="card" onclick="openPartner()"><div class="card-badge">EARN</div><div class="card-icon"><i class="fa-solid fa-naira-sign"></i></div><div class="card-title">Become a Floot Partner</div><div class="card-desc">Earn commission whenever people buy airtime and data.</div></div></div>
+</div>
+<button class="download-banner" onclick="openInstallChooser()">
+<div class="download-banner-left"><i class="fa-brands fa-android"></i><div class="download-banner-text"><h4>Download Floot NG App</h4><p>Faster access • Offline mode • Push notifications</p></div></div>
+<i class="fa-solid fa-arrow-right"></i>
 </button>
-
-<!-- CONTACT MODAL -->
-<div
-  id="contactModal"
-  onclick="closeContact()"
->
-
-  <div
-    class="contact-content"
-    onclick="event.stopPropagation()"
-  >
-
-    <button
-      class="contact-close"
-      onclick="closeContact()"
-    >
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-
-    <h3>
-      Contact Floot NG
-    </h3>
-
-    <!-- WHATSAPP -->
-    <a
-      href="https://wa.me/2349032825215"
-      target="_blank"
-      class="contact-item"
-    >
-
-      <div class="contact-icon whatsapp">
-        <i class="fa-brands fa-whatsapp"></i>
-      </div>
-
-      <div class="contact-info">
-        <h4>WhatsApp</h4>
-        <p>Chat with us instantly</p>
-      </div>
-
-    </a>
-
-    <!-- EMAIL -->
-    <a
-      href="mailto:flootinitiative@gmail.com"
-      class="contact-item"
-    >
-
-      <div class="contact-icon gmail">
-        <i class="fa-solid fa-envelope"></i>
-      </div>
-
-      <div class="contact-info">
-        <h4>Email</h4>
-        <p>flootinitiative@gmail.com</p>
-      </div>
-
-    </a>
-
-    <!-- FACEBOOK -->
-    <a
-      href="https://www.facebook.com/flootride"
-      target="_blank"
-      class="contact-item"
-    >
-
-      <div class="contact-icon facebook">
-        <i class="fa-brands fa-facebook-f"></i>
-      </div>
-
-      <div class="contact-info">
-        <h4>Facebook</h4>
-        <p>Follow our page</p>
-      </div>
-
-    </a>
-
-  </div>
 </div>
-
-<!-- INSTALL MODAL -->
-<div
-  id="installModal"
-  onclick="closeInstall(event)"
->
-
-  <div
-    class="install-card"
-    onclick="event.stopPropagation()"
-  >
-
-    <button
-      class="install-close"
-      onclick="closeInstall()"
-    >
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-
-    <!-- CHOOSER VIEW -->
-    <div id="chooserView">
-
-      <h3 class="install-title">
-        Download Floot NG
-      </h3>
-
-      <p class="install-subtitle">
-        Choose your device to continue
-      </p>
-
-      <div class="install-options">
-
-        <!-- ANDROID -->
-        <div
-          class="install-option"
-          onclick="handleAndroid()"
-        >
-
-          <i class="fa-brands fa-android android-icon"></i>
-
-          <h4>
-            Android
-          </h4>
-
-          <p>
-            Direct Download
-          </p>
-
-        </div>
-
-        <!-- IPHONE -->
-        <div
-          class="install-option"
-          onclick="showIphoneSteps()"
-        >
-
-          <i class="fa-brands fa-apple apple-icon"></i>
-
-          <h4>
-            iPhone
-          </h4>
-
-          <p>
-            Add to Home Screen
-          </p>
-
-        </div>
-
-      </div>
-    </div>
-
-    <!-- IPHONE STEPS -->
-    <div
-      id="iphoneView"
-      class="iphone-steps"
-    >
-
-      <h3 class="install-title">
-        <i class="fa-brands fa-apple"></i>
-        How to Install on iPhone
-      </h3>
-
-      <div style="height:16px;"></div>
-
-      <div class="install-steps-list">
-
-        <div class="install-step-item">
-
-          <div class="step-num">
-            1
-          </div>
-
-          <p>
-            Tap the <b>Share</b> button
-            <span class="share-icon">
-              <i class="fa-solid fa-arrow-up-from-bracket"></i>
-            </span>
-            at the bottom of your Safari browser
-          </p>
-
-        </div>
-
-        <div class="install-step-item">
-
-          <div class="step-num">
-            2
-          </div>
-
-          <p>
-            Scroll down and tap
-            <b>Add to Home Screen</b>
-            <i
-              class="fa-solid fa-square-plus"
-              style="color:#8B8B8B;"
-            ></i>
-          </p>
-
-        </div>
-
-        <div class="install-step-item">
-
-          <div class="step-num">
-            3
-          </div>
-
-          <p>
-            Tap <b>Add</b> at the top right corner.
-            Floot NG will appear like a real app!
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="safari-note">
-
-        <i class="fa-solid fa-lightbulb"></i>
-
-        <span>
-          You must open this page in
-          <b style="color:#FFF;">Safari</b>
-          – it doesn't work inside WhatsApp or Facebook browser.
-        </span>
-
-      </div>
-
-      <button
-        class="btn-gotit"
-        onclick="closeInstall()"
-      >
-        Got it, Thanks!
-      </button>
-
-    </div>
-
-  </div>
+<button class="contact-fab" onclick="openContact()"><i class="fa-solid fa-comment-dots"></i></button>
+<div id="contactModal" onclick="closeContact()"><div class="contact-content" onclick="event.stopPropagation()"><button class="contact-close" onclick="closeContact()"><i class="fa-solid fa-xmark"></i></button><h3>Contact Floot NG</h3><a href="https://wa.me/2349032825215" target="_blank" class="contact-item"><div class="contact-icon whatsapp"><i class="fa-brands fa-whatsapp"></i></div><div class="contact-info"><h4>WhatsApp</h4><p>Chat with us instantly</p></div></a><a href="mailto:flootinitiative@gmail.com" class="contact-item"><div class="contact-icon gmail"><i class="fa-solid fa-envelope"></i></div><div class="contact-info"><h4>Email</h4><p>flootinitiative@gmail.com</p></div></a><a href="https://www.facebook.com/flootride" target="_blank" class="contact-item"><div class="contact-icon facebook"><i class="fa-brands fa-facebook-f"></i></div><div class="contact-info"><h4>Facebook</h4><p>Follow our page</p></div></a></div></div>
+<div id="installModal" onclick="closeInstall(event)">
+<div class="install-card" onclick="event.stopPropagation()">
+<button class="install-close" onclick="closeInstall()"><i class="fa-solid fa-xmark"></i></button>
+<div id="chooserView">
+<h3 class="install-title">Download Floot NG</h3>
+<p class="install-subtitle">Choose your device to continue</p>
+<div class="install-options">
+<div class="install-option" onclick="handleAndroid()">
+<i class="fa-brands fa-android" style="color:#3DDC84"></i>
+<h4>Android</h4>
+<p>Direct Download</p>
 </div>
-
+<div class="install-option" onclick="showIphoneSteps()">
+<i class="fa-brands fa-apple" style="color:#FFF"></i>
+<h4>iPhone</h4>
+<p>Add to Home Screen</p>
+</div>
+</div>
+</div>
+<div id="iphoneView" class="iphone-steps">
+<h3 class="install-title"><i class="fa-brands fa-apple"></i> How to Install on iPhone</h3>
+<div style="height:16px;"></div>
+<div class="install-steps-list">
+<div class="install-step-item"><div class="step-num">1</div><p>Tap the <b>Share</b> button <span class="share-icon"><i class="fa-solid fa-arrow-up-from-bracket"></i></span> at the bottom of your Safari browser</p></div>
+<div class="install-step-item"><div class="step-num">2</div><p>Scroll down and tap <b>Add to Home Screen</b> <i class="fa-solid fa-square-plus" style="color:#8B8B8B;"></i></p></div>
+<div class="install-step-item"><div class="step-num">3</div><p>Tap <b>Add</b> at the top right corner. Floot NG will appear like a real app!</p></div>
+</div>
+<div class="safari-note"><i class="fa-solid fa-lightbulb"></i><span>You must open this page in <b style="color:#FFF;">Safari</b> – it doesn't work inside WhatsApp or Facebook browser.</span></div>
+<button class="btn-gotit" onclick="closeInstall()">Got it, Thanks!</button>
+</div>
+</div>
+</div>
 <script>
-
-/* =========================
-   TAB SWITCHING
-========================= */
-
-document.querySelectorAll(".tab").forEach(tab => {
-
-  tab.addEventListener("click", () => {
-
-    document
-      .querySelectorAll(".tab")
-      .forEach(t => t.classList.remove("active"));
-
-    document
-      .querySelectorAll(".tab-content")
-      .forEach(c => c.classList.remove("active"));
-
-    tab.classList.add("active");
-
-    document
-      .getElementById(tab.dataset.tab)
-      .classList.add("active");
-
-  });
-
-});
-
-
-/* =========================
-   AD SLIDER
-========================= */
-
-let currentAd = 0;
-
-const slides = document.querySelectorAll(".ad-slide");
-
-setInterval(() => {
-
-  if(slides.length === 0) return;
-
-  slides[currentAd].classList.remove("active");
-
-  currentAd =
-    (currentAd + 1) % slides.length;
-
-  slides[currentAd].classList.add("active");
-
-}, 3500);
-
-
-/* =========================
-   SERVICE LINKS
-========================= */
-
-/* FLOOT VTU */
-function openVTU(){
-
-  window.open(
-    "https://sabuss.com/flootng5?login",
-    "_blank"
-  );
-
-}
-
-
-/* FLOOTGEE */
-function openFlootGee(){
-
-  window.open(
-    "https://gee.floot.com.ng/",
-    "_blank"
-  );
-
-}
-
-
-/* FLOOT PARTNER */
-function openPartner(){
-
-  window.open(
-    "https://partner.floot.ng/",
-    "_blank"
-  );
-
-}
-
-
-/* =========================
-   CONTACT MODAL
-========================= */
-
-function openContact(){
-
-  document
-    .getElementById("contactModal")
-    .classList.add("active");
-
-}
-
-
-function closeContact(){
-
-  document
-    .getElementById("contactModal")
-    .classList.remove("active");
-
-}
-
-
-/* =========================
-   INSTALL MODAL
-========================= */
-
-function openInstallChooser(){
-
-  document
-    .getElementById("chooserView")
-    .style.display = "block";
-
-  document
-    .getElementById("iphoneView")
-    .classList.remove("active");
-
-  document
-    .getElementById("installModal")
-    .classList.add("active");
-
-}
-
-
-/* IPHONE INSTRUCTIONS */
-
-function showIphoneSteps(){
-
-  document
-    .getElementById("chooserView")
-    .style.display = "none";
-
-  document
-    .getElementById("iphoneView")
-    .classList.add("active");
-
-}
-
-
-/* ANDROID DOWNLOAD */
-
-function handleAndroid(){
-
-  window.open(
-    "https://www.appcreator24.com/app2576193-afw902",
-    "_blank"
-  );
-
-  closeInstall();
-
-}
-
-
-/* CLOSE INSTALL MODAL */
-
-function closeInstall(e){
-
-  if(
-    !e ||
-    e.target.id === "installModal" ||
-    e.target.closest(".install-close") ||
-    e.target.closest(".btn-gotit")
-  ){
-
-    document
-      .getElementById("installModal")
-      .classList.remove("active");
-
-    setTimeout(() => {
-
-      document
-        .getElementById("chooserView")
-        .style.display = "block";
-
-      document
-        .getElementById("iphoneView")
-        .classList.remove("active");
-
-    },200);
-
-  }
-
-}
-
-
-/* =========================
-   BASIC ONLINE CHECK
-========================= */
-
-function checkConnection(){
-
-  const offlineScreen =
-    document.getElementById("offlineScreen");
-
-  if(!navigator.onLine){
-
-    offlineScreen.style.display = "flex";
-
-  }else{
-
-    offlineScreen.style.display = "none";
-
-  }
-
-}
-
-window.addEventListener(
-  "online",
-  checkConnection
-);
-
-window.addEventListener(
-  "offline",
-  checkConnection
-);
-
-checkConnection();
-
+document.querySelectorAll(".tab").forEach(tab=>{tab.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));tab.classList.add("active");document.getElementById(tab.dataset.tab).classList.add("active");});});
+let currentAd=0;const slides=document.querySelectorAll(".ad-slide");setInterval(()=>{slides[currentAd].classList.remove("active");currentAd=(currentAd+1)%slides.length;slides[currentAd].classList.add("active");},3500);
+function openVTU(){window.open("https://sabuss.com/flootng5?login","_blank");}
+function openRide(){window.open("https://ride.floot.com.ng","_blank");}
+function openPartner(){window.open("https://partner.floot.ng","_blank");}
+const rideIcons=["fa-car-side","fa-motorcycle","fa-truck-fast","fa-box","fa-person-biking"];let rI=0;const rEl=document.getElementById("rideDeliveryIcon");setInterval(()=>{if(!rEl)return;rEl.classList.add("switching");setTimeout(()=>{rI=(rI+1)%rideIcons.length;rEl.className="fa-solid "+rideIcons[rI];rEl.classList.remove("switching");},300);},1800);
+function openContact(){document.getElementById("contactModal").classList.add("active");}function closeContact(){document.getElementById("contactModal").classList.remove("active");}
+function openInstallChooser(){document.getElementById("chooserView").style.display="block";document.getElementById("iphoneView").classList.remove("active");document.getElementById("installModal").classList.add("active");}
+function showIphoneSteps(){document.getElementById("chooserView").style.display="none";document.getElementById("iphoneView").classList.add("active");}
+function handleAndroid(){window.open("https://www.appcreator24.com/app2576193-afw902","_blank");closeInstall();}
+function closeInstall(e){if(!e || e.target.id==="installModal" || e.target.closest(".install-close") || e.target.closest(".btn-gotit")){document.getElementById("installModal").classList.remove("active");setTimeout(()=>{document.getElementById("chooserView").style.display="block";document.getElementById("iphoneView").classList.remove("active");},200);}}
+function checkConnection(){const os=document.getElementById("offlineScreen");if(!navigator.onLine){os.style.display="flex";}else{os.style.display="none";}}
+window.addEventListener("online",checkConnection);window.addEventListener("offline",checkConnection);checkConnection();
 </script>
-
 </body>
 </html>
